@@ -1,0 +1,14 @@
+export FREESURFER_HOME='/usr/local/freesurfer'
+export FSL_DIR=/usr/share/fsl/5.0
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+
+
+estudo=$1
+for i in $estudo/*; do
+
+cd $i
+
+
+cp *.nii raw.nii
+
+done

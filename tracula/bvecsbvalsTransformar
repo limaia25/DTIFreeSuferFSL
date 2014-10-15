@@ -1,0 +1,14 @@
+export FREESURFER_HOME='/usr/local/freesurfer'
+export FSL_DIR=/usr/share/fsl/5.0
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+
+
+estudo=$1
+for i in $estudo/*; do
+
+cd $i
+'/home/lapsi/scriptDataFreeSurfer/transpose-2.0/src/transpose' --fsep ' ' -t *.bvec > dwi_orig_flip.mghdti.bvecs
+
+'/home/lapsi/scriptDataFreeSurfer/transpose-2.0/src/transpose' --fsep ' ' -t *.bval > dwi_orig_flip.mghdti.bvals
+
+done

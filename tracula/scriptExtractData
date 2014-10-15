@@ -1,0 +1,49 @@
+#!/bin/sh
+
+export FREESURFER_HOME='/usr/local/freesurfer'
+export FSL_DIR=/usr/share/fsl/5.0
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+
+estudo=$1
+for i in $estudo/*; do
+sujeito=$i
+echo $sujeito
+
+echo $sujeito/dpath/lh.atr_PP_avg33_mni_bbr/pathstats.overall.txt >> lh.atr_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/lh.cab_PP_avg33_mni_bbr/pathstats.overall.txt >> lh.cab_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/lh.ccg_PP_avg33_mni_bbr/pathstats.overall.txt >> lh.ccg_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/lh.cst_AS_avg33_mni_bbr/pathstats.overall.txt >> lh.cst_AS_avg33_mni_bbr.files
+echo $sujeito/dpath/lh.ilf_AS_avg33_mni_bbr/pathstats.overall.txt >> lh.ilf_AS_avg33_mni_bbr.files
+echo $sujeito/dpath/lh.slfp_PP_avg33_mni_bbr/pathstats.overall.txt >> lh.slfp_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/lh.slft_PP_avg33_mni_bbr/pathstats.overall.txt >> lh.slft_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/lh.unc_AS_avg33_mni_bbr/pathstats.overall.txt >> lh.unc_AS_avg33_mni_bbr.files
+
+echo $sujeito/dpath/rh.atr_PP_avg33_mni_bbr/pathstats.overall.txt >> rh.atr_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/rh.cab_PP_avg33_mni_bbr/pathstats.overall.txt >> rh.cab_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/rh.ccg_PP_avg33_mni_bbr/pathstats.overall.txt >> rh.ccg_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/rh.cst_AS_avg33_mni_bbr/pathstats.overall.txt >> rh.cst_AS_avg33_mni_bbr.files
+echo $sujeito/dpath/rh.ilf_AS_avg33_mni_bbr/pathstats.overall.txt >> rh.ilf_AS_avg33_mni_bbr.files
+echo $sujeito/dpath/rh.slfp_PP_avg33_mni_bbr/pathstats.overall.txt >> rh.slfp_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/rh.slft_PP_avg33_mni_bbr/pathstats.overall.txt >> rh.slft_PP_avg33_mni_bbr.files
+echo $sujeito/dpath/rh.unc_AS_avg33_mni_bbr/pathstats.overall.txt >> rh.unc_AS_avg33_mni_bbr.files
+
+done
+
+tractstats2table --load-pathstats-from-file lh.atr_PP_avg33_mni_bbr.files --overall --tablefile lh.atr_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file lh.cab_PP_avg33_mni_bbr.files --overall --tablefile lh.cab_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file lh.ccg_PP_avg33_mni_bbr.files --overall --tablefile lh.ccg_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file lh.cst_AS_avg33_mni_bbr.files --overall --tablefile lh.cst_AS_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file lh.ilf_AS_avg33_mni_bbr.files --overall --tablefile lh.ilf_AS_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file lh.slfp_PP_avg33_mni_bbr.files --overall --tablefile lh.slfp_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file lh.slft_PP_avg33_mni_bbr.files --overall --tablefile lh.slft_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file lh.unc_AS_avg33_mni_bbr.files --overall --tablefile lh.unc_AS_avg33_mni_bbr.table
+
+tractstats2table --load-pathstats-from-file rh.atr_PP_avg33_mni_bbr.files --overall --tablefile rh.atr_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file rh.cab_PP_avg33_mni_bbr.files --overall --tablefile rh.cab_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file rh.ccg_PP_avg33_mni_bbr.files --overall --tablefile rh.ccg_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file rh.cst_AS_avg33_mni_bbr.files --overall --tablefile rh.cst_AS_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file rh.ilf_AS_avg33_mni_bbr.files --overall --tablefile rh.ilf_AS_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file rh.slfp_PP_avg33_mni_bbr.files --overall --tablefile rh.slfp_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file rh.slft_PP_avg33_mni_bbr.files --overall --tablefile rh.slft_PP_avg33_mni_bbr.table
+tractstats2table --load-pathstats-from-file rh.unc_AS_avg33_mni_bbr.files --overall --tablefile rh.unc_AS_avg33_mni_bbr.table
+
