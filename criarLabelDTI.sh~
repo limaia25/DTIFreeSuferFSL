@@ -1,3 +1,5 @@
+#!/bin/bash
+
 estudoDirectory=$1
 file=$2
 newStructureBool=0
@@ -19,7 +21,7 @@ for subjectN in $estudoDirectory/*;
 			if [$newStructureBool!=1] && [$newStructureBool!=2]
 					fsl5.0-fslmaths $subjectN/wmparc.flt.nii.gz -thr $i -uthr $i $subject'/'$i'.nii.gz'
 					fsl5.0-fslmaths $subjectN/$newStructurename.nii.gz -add $subject'/'$i'.nii.gz' $subjectN/$newStructurename.nii.gz
-				elif [$newStructureBool==2]; then
+				elif [$newStructureBool==2];then
 					fsl5.0-fslmaths $subjectN/wmparc.flt.nii.gz -thr $i -uthr $i $subject'/'$i'.nii.gz'
 					cp $subject'/'$i'.nii.gz' $subjectN/$newStructurename.nii.gz
 					$newStructureBool=0				

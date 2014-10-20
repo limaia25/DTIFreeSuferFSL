@@ -1,0 +1,48 @@
+#!/bin/bash
+##Script para preprocessamento DTI
+
+fileDWI=$1
+estudo=$2
+nome=$3
+
+
+'dcm2nii' -n Y -d N -e N -i Y -p N -o $estudo $fileDWI
+
+for j in $estudo/*.bval; do
+bvals=$j
+break
+done
+
+fileNII="${bvals%%.*}"
+
+echo $fileNII
+
+#EddyCurrent
+fsl5.0-eddy_correct $fileNII.nii.gz $estudo/ecDWI 0
+
+#escolher a base
+fsl5.0-fslroi $estudo/ecDWI.nii.gz $estudo/$nome"base.nii.gz" 0 1
+
+#bet
+fsl5.0-bet $estudo/base.nii.gz $estudo/$nome"base_brain" -f 0.2 -g 0 -m
+
+for j in $estudo/*.bval; do
+bvals=$j
+break
+done
+
+for k in $estudo/*.bvec; do
+bvecs=$k
+break
+done
+
+#dtifit
+fsl5.0-dtifit --data=$2/ecDWI.nii.gz --out=$estudo/$nome'dti' --mask=$2/base_brain_mask.nii.gz --bvecs=$bvecs --bvals=$bvals --wls --save_tensor
+
+
+
+
+
+
+
+
