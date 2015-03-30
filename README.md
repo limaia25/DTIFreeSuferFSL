@@ -26,9 +26,9 @@ All files will be on directory: `studyDirectory/DTIfsl`
 * <subject>.bvec
 * <subject>dti.nii.gz
 * <subject>ecDWI.nii.gz
-* 
+ 
 ## 2. FreeSurfer
-
+On this process, all files resulting from FreeSurfer processing are co-registrated on DTI space. Using fsl5.0-flirt, the brain.mgz are co-registrated on the same space as base_DTI and the transformed file is used for the following steps.
 
 ### Output Files
 All Files of this processing will be on directory: `DTIfslFreeSurfer`
