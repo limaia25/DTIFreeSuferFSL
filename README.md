@@ -19,30 +19,40 @@ which:
 5. <b> DTI fit</b> DTI computing was processed using DTI_Fit 
 
 ### Output Files
-All files will be on directory: `studyDirectory/DTIfsl`
-* <subject>base.nii.gz
-* <subject>base_brain_mask.nii.gz
-* <subject>.bval
-* <subject>.bvec
-* <subject>dti.nii.gz
-* <subject>ecDWI.nii.gz
+All files will be on directory: `studyDirectory/DTIfsl`. For each subject directory:
+* {subject}base.nii.gz
+* {subject}base_brain_mask.nii.gz
+* {subject}.bval
+* {subject}.bvec
+* {subject}dti.nii.gz
+* {subject}ecDWI.nii.gz
  
 ## 2. FreeSurfer
-On this process, all files resulting from FreeSurfer processing are co-registrated on DTI space. Using fsl5.0-flirt, the brain.mgz are co-registrated on the same space as base_DTI and the transformed file is used for the following steps.
+On this process, all files resulting from FreeSurfer processing are co-registrated on DTI space. All the files resulting from FreeSurfer processing are flipped to FSL orientation. Using fsl5.0-flirt, the brain.mgz are co-registrated on the same space as base_DTI and the transformed file is used for the following steps.
+1.Co-registration of wmparc and aparc_aseg on 
 
 ### Output Files
 All Files of this processing will be on directory: `DTIfslFreeSurfer`
+For each subjec:
+* brain_anat_orig.nii.gz  - Converted file resulted from brain.mgz [FreeSurfer processing]
+* brain_anat.nii.gz - Flipped image to fsl orientation
+* anatorig2anat.mat and anat2anatorig.dat - Calculate original anatomical to flipped anatomical
+* base_brain.flt.nii.gz - using flirt tool, output resulted from registration of <subject>base.nii.gz on brain_anat(reference).
+* diff2anat.flt.mat - transformation file from registration
+* anat2diff.flt.mat - reversed transformation file
+* aparc+aseg.nii.gz  - Converted file resulted from aparc+aseg.mgz [FreeSurfer processing]
+* aparc+aseg_mask.nii.gz - binarization of aparc+aseg file (used for masking) and flipped for fsl
+* aparc+aseg.flt.nii.gz -using flirt tool, output resulted from registration of aparc+aseg.nii.gz on <subject>lowb image(reference) and using the anat2diff transforming file.
+* wmparc.nii.gz  - Converted file resulted from wmparc.mgz [FreeSurfer processing]
+* wmparc_mask.nii.gz - binarization of wmparc file (used for masking) and flipped for fsl
+* wmparc.flt.nii.gz -using flirt tool, output resulted from registration of wmparc.nii.gz on <subject>lowb image(reference) and using the anat2diff transforming file.
 
+##Computing metrics/stats of strutures
+On this process, we choose the labels numbers of the strutures of each file. Some strutures are the sum of number of labels, some strutures are only the labels it self. The image are segmented into label files, using `fslmaths -thr -uthr` If the struture have more than one label numbers, the estructure resulting is the "sum" of the labels, using `fslmaths -add`. 
+The stats (FA,MD and AD) are resulted from `fsl5.0-fslstats -V -m`
 
+### Output Files
+* {strutureName}.nii.gz
+* file with:
+   * FA name 
 
-
-
-
-
-* m
-* n
-
-1. m
-2. v
-
-##DTI
